@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="km" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIខ្មែរ — រៀន AI ជាភាសាខ្មែរ</title>
+<meta name="description" content="រៀនប្រើ AI ជាភាសាខ្មែរ — ឧបករណ៍ឥតគិតថ្លៃ របៀបប្រើជាជំហាន ព័ត៌មាន AI។ ឥតគិតថ្លៃ ជាក់ស្តែង ប្រើបានពិតនៅកម្ពុជា។">
+<meta property="og:title" content="AIខ្មែរ — រៀន AI ជាភាសាខ្មែរ">
+<meta property="og:description" content="ឧបករណ៍ឥតគិតថ្លៃ របៀបប្រើជាជំហាន ព័ត៌មាន AI ជាភាសាខ្មែរ។">
+<meta property="og:type" content="website">
+<style>
+:root{
+  --bg:#0b0b10; --bg2:#101018; --card:rgba(255,255,255,.045);
+  --border:rgba(212,175,55,.16); --gold:#d4af37; --gold2:#f0d97a;
+  --text:#efe9d8; --muted:#a9a294; --radius:16px;
+  --shadow:0 8px 30px rgba(0,0,0,.45);
+}
+[data-theme="light"]{
+  --bg:#faf7ef; --bg2:#f3eee1; --card:#ffffff;
+  --border:rgba(150,110,20,.20); --gold:#9a7414; --gold2:#b98a1c;
+  --text:#1e1b13; --muted:#6f675a; --shadow:0 8px 24px rgba(120,90,20,.12);
+}
+*{box-sizing:border-box; margin:0; padding:0}
+body{
+  font-family:"Noto Sans Khmer","Khmer OS Siemreap","Khmer OS",system-ui,sans-serif;
+  background:var(--bg); color:var(--text); line-height:1.9; font-size:16px;
+  transition:background .3s,color .3s;
+}
+a{color:var(--gold2); text-decoration:none}
+.container{max-width:1080px; margin:0 auto; padding:0 20px}
+header{
+  position:sticky; top:0; z-index:50; backdrop-filter:blur(14px);
+  background:color-mix(in srgb, var(--bg) 82%, transparent);
+  border-bottom:1px solid var(--border);
+}
+.nav{display:flex; align-items:center; gap:16px; padding:14px 0; flex-wrap:wrap}
+.logo{font-size:22px; font-weight:800;
+  background:linear-gradient(120deg,var(--gold2),var(--gold));
+  -webkit-background-clip:text; background-clip:text; color:transparent;}
+.logo small{font-size:12px; color:var(--muted); font-weight:400; display:block;
+  -webkit-text-fill-color:var(--muted);}
+.nav-links{display:flex; gap:6px; flex-wrap:wrap}
+.nav-links a{color:var(--text); padding:8px 14px; border-radius:10px; font-size:15px}
+.nav-links a:hover,.nav-links a.active{background:var(--card)}
+.search{margin-left:auto; display:flex; gap:8px; align-items:center}
+.search input{
+  background:var(--card); border:1px solid var(--border); color:var(--text);
+  border-radius:10px; padding:8px 14px; font-size:14px; width:190px; font-family:inherit;
+}
+.theme-btn{background:var(--card); border:1px solid var(--border); color:var(--text);
+  border-radius:10px; padding:8px 12px; cursor:pointer; font-size:15px}
+.hero{text-align:center; padding:64px 20px 48px;
+  background:radial-gradient(ellipse 70% 60% at 50% 0%, rgba(212,175,55,.10), transparent);}
+.hero h1{font-size:clamp(30px,5vw,48px); line-height:1.5; margin-bottom:12px;
+  background:linear-gradient(120deg,var(--gold2),var(--gold) 60%,var(--gold2));
+  -webkit-background-clip:text; background-clip:text; color:transparent;}
+.hero p{color:var(--muted); font-size:18px; max-width:640px; margin:0 auto 24px}
+.btn{display:inline-block; padding:12px 26px; border-radius:12px; font-weight:700;
+  background:linear-gradient(120deg,var(--gold),var(--gold2)); color:#141005; margin:4px}
+.btn.ghost{background:var(--card); color:var(--text); border:1px solid var(--border)}
+.pills{display:flex; gap:10px; flex-wrap:wrap; justify-content:center; margin:8px 0 28px}
+.pill{padding:8px 18px; border-radius:999px; border:1px solid var(--border);
+  background:var(--card); color:var(--text); cursor:pointer; font-size:14px; font-family:inherit}
+.pill.active{background:linear-gradient(120deg,var(--gold),var(--gold2)); color:#141005;
+  border-color:transparent; font-weight:700}
+.grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:20px; padding-bottom:40px}
+.card{background:var(--card); border:1px solid var(--border); border-radius:var(--radius);
+  padding:24px; box-shadow:var(--shadow); cursor:pointer; transition:transform .2s}
+.card:hover{transform:translateY(-4px)}
+.badge{display:inline-block; font-size:12px; padding:4px 12px; border-radius:999px;
+  background:rgba(212,175,55,.14); color:var(--gold2); border:1px solid var(--border); margin-bottom:10px}
+[data-theme="light"] .badge{color:var(--gold)}
+.card h3{font-size:19px; line-height:1.6; margin-bottom:8px}
+.card p{color:var(--muted); font-size:14px}
+.meta{display:flex; gap:12px; color:var(--muted); font-size:12.5px; margin-top:12px}
+.article{max-width:760px; margin:0 auto; padding:36px 20px 60px}
+.article h1{font-size:clamp(24px,4vw,34px); line-height:1.6; margin:12px 0}
+.article h2{font-size:21px; margin:30px 0 10px; color:var(--gold2)}
+[data-theme="light"] .article h2{color:var(--gold)}
+.article p, .article li{margin-bottom:12px}
+.article ul,.article ol{padding-right:0; padding-left:22px}
+.article table{width:100%; border-collapse:collapse; margin:16px 0; font-size:14px}
+.article th,.article td{border:1px solid var(--border); padding:10px 12px; text-align:left; vertical-align:top}
+.article th{background:var(--card)}
+.note{background:rgba(212,175,55,.08); border:1px solid var(--border);
+  border-radius:12px; padding:16px 18px; margin:20px 0; font-size:14.5px}
+.note strong{color:var(--gold2)}
+[data-theme="light"] .note strong{color:var(--gold)}
+.back{display:inline-block; margin-bottom:8px; font-size:14px}
+.newsletter{background:var(--card); border:1px solid var(--border); border-radius:var(--radius);
+  padding:36px; text-align:center; margin:20px 0 48px; box-shadow:var(--shadow)}
+.newsletter h2{margin-bottom:8px}
+.newsletter p{color:var(--muted); margin-bottom:18px}
+.newsletter form{display:flex; gap:10px; justify-content:center; flex-wrap:wrap}
+.newsletter input{padding:12px 18px; border-radius:12px; border:1px solid var(--border);
+  background:var(--bg); color:var(--text); font-family:inherit; width:min(320px,100%)}
+.newsletter button{padding:12px 26px; border-radius:12px; border:none; cursor:pointer;
+  font-weight:700; font-family:inherit;
+  background:linear-gradient(120deg,var(--gold),var(--gold2)); color:#141005}
+.form-msg{margin-top:12px; font-size:14px; color:var(--gold2)}
+footer{border-top:1px solid var(--border); padding:36px 0; color:var(--muted); font-size:14px}
+footer .container{display:flex; gap:24px; flex-wrap:wrap; justify-content:space-between}
+.social{display:flex; gap:10px}
+.social a{padding:8px 16px; border:1px solid var(--border); border-radius:10px; font-size:14px}
+.about{max-width:760px; margin:0 auto; padding:36px 20px 60px}
+.about h1{margin-bottom:14px}
+.empty{text-align:center; color:var(--muted); padding:40px 0; grid-column:1/-1}
+@media(max-width:640px){ .search{margin-left:0; width:100%} .search input{flex:1} }
+</style>
+</head>
+<body>
+<header>
+  <div class="container nav">
+    <a class="logo" href="#/">AIខ្មែរ<small>រៀន AI ជាភាសាខ្មែរ</small></a>
+    <nav class="nav-links">
+      <a href="#/">ទំព័រដើម</a>
+      <a href="#/about">អំពីយើង</a>
+    </nav>
+    <div class="search">
+      <input id="q" type="search" placeholder="ស្វែងរកអត្ថបទ...">
+      <button class="theme-btn" id="themeBtn" title="ប្តូរពន្លឺ/ងងឹត">🌙</button>
+    </div>
+  </div>
+</header>
+<main class="container" id="app"></main>
+<footer>
+  <div class="container">
+    <div>© 2026 AIខ្មែរ — រៀន AI ជាភាសាខ្មែរ។ មាតិកាឥតគិតថ្លៃសម្រាប់សហគមន៍។</div>
+    <div class="social">
+      <a href="#" id="ytLink">YouTube</a>
+      <a href="#" id="fbLink">Facebook</a>
+    </div>
+  </div>
+</footer>
+<script>
+const CATS = {
+  "free-tools": "ឧបករណ៍ឥតគិតថ្លៃ",
+  "howto": "របៀបប្រើជាជំហាន",
+  "news": "ព័ត៌មាន AI",
+  "tips": "គន្លឹះនិងល្បិច"
+};
+
+const ARTICLES = [
+{
+id: "free-ai-tools-cambodia",
+title: "ឧបករណ៍ AI ឥតគិតថ្លៃ ១០ ដែលប្រើបានពិតនៅកម្ពុជា",
+cat: "free-tools", date: "៨ តុលា ២០២៦", read: "៦ នាទី",
+excerpt: "បញ្ជីឧបករណ៍ AI ឥតគិតថ្លៃដែលបានផ្ទៀងផ្ទាត់ — មិនត្រូវការ card ប្រើបានពីកម្ពុជា ព្រមទាំងចំណុចត្រូវប្រុងប្រយ័ត្ន។",
+tags: "ai free tools cambodia",
+body: `
+<p><strong>សេចក្តីសន្និដ្ឋានខាងដើម៖</strong> ឧបករណ៍ទាំង ១០ ខាងក្រោមប្រើបានពិតពីកម្ពុជា — មិនត្រូវការ credit card ចុះឈ្មោះដោយ email ឬ Google account បាន។ តែចាំថា «ឥតគិតថ្លៃ» មិនមានន័យថាគ្មានតម្លៃទេ៖ អ្នកចំណាយពេលវេលា ហើយ free tier ខ្លះអាចយក prompts របស់អ្នកទៅ train — កុំដាក់ទិន្នន័យ sensitive។</p>
+<h2>១. សម្រាប់សួរ-ឆ្លើយ និងសរសេរ</h2>
+<ul>
+<li><strong>ChatGPT (free)</strong> — chatgpt.com — សួរ-ឆ្លើយ សរសេរ បកប្រែ។ គណនីឥតគិតថ្លៃគ្រប់គ្រាន់សម្រាប់ការងារប្រចាំថ្ងៃ។</li>
+<li><strong>Claude (free)</strong> — claude.ai — ពូកែសរសេរអត្ថបទវែង និងវិភាគឯកសារ។</li>
+<li><strong>DeepSeek</strong> — chat.deepseek.com ឥតគិតថ្លៃទាំងស្រុង ហើយ API ឱ្យ 5M tokens ឥតគិតថ្លៃពេលចុះឈ្មោះ។</li>
+</ul>
+<h2>២. API ឥតគិតថ្លៃសម្រាប់អ្នកសាងសង់</h2>
+<ul>
+<li><strong>Groq Cloud</strong> — console.groq.com — លឿនខ្លាំង ចុះឈ្មោះដោយ email ប៉ុណ្ណោះ គ្មាន card។</li>
+<li><strong>Google AI Studio</strong> — aistudio.google.com — Gemini API free tier ត្រូវតែ Google account។ ប្រយ័ត្ន៖ free tier របស់ Google អាចយក prompts ទៅ improve products — កុំដាក់ទិន្នន័យ sensitive។</li>
+</ul>
+<h2>៣. សម្លេង និងរូបភាព</h2>
+<ul>
+<li><strong>Microsoft Edge TTS</strong> — ប្តូរអត្ថបទខ្មែរទៅជាសម្លេងឥតគិតថ្លៃ (Read aloud ក្នុង Edge) — ល្អសម្រាប់ធ្វើ voiceover វីដេអូ។</li>
+<li><strong>Handy</strong> — ប្តូរសម្លេងជាអត្ថបទ 100% offline លើ Windows (open-source) — ទិន្នន័យមិនចេញពីម៉ាស៊ីនអ្នក។</li>
+<li><strong>ComfyUI</strong> — បង្កើតរូបភាព AI ឥតគិតថ្លៃលើកុំព្យូទ័រខ្លួនឯង (open-source) — ត្រូវការ GPU ខ្លាំង និងពេលរៀនប្រើ។</li>
+</ul>
+<h2>៤. រៀន AI ឥតគិតថ្លៃ + certificate</h2>
+<ul>
+<li><strong>Kaggle Learn</strong> — kaggle.com/learn — micro-courses + certificate ឥតគិតថ្លៃ។</li>
+<li><strong>Anthropic Academy</strong> — វគ្គ Claude, MCP, agents + certificate ឥតគិតថ្លៃ។</li>
+</ul>
+<div class="note"><strong>🇰🇭 ចំណាំសម្រាប់កម្ពុជា៖</strong> offer ដែលត្រូវការ credit card ត្រូវប្រុងប្រយ័ត្ន — កាតចេញនៅកម្ពុជាមួយចំនួនមិនត្រូវបានគាំទ្រ។ បញ្ជីខាងលើជ្រើសតែអ្វីដែលមិនត្រូវការ card ប៉ុណ្ណោះ។ Quotas និង limits ប្រែប្រួលញឹកញាប់ — dashboard របស់ provider ទើបជា ground truth។</div>
+<p><em>សេចក្តីបញ្ជាក់៖ អត្ថបទនេះស្រាវជ្រាវនៅខែតុលា ២០២៦ ដោយមាន AI ជួយរៀបចំ។ តម្លៃនិងលក្ខខណ្ឌអាចប្រែប្រួល។</em></p>`
+},
+{
+id: "youtube-monetization-cambodia",
+title: "របៀបបើក monetization YouTube នៅកម្ពុជា (2026)",
+cat: "howto", date: "៨ តុលា ២០២៦", read: "៥ នាទី",
+excerpt: "YouTube Partner Program បើកនៅកម្ពុជាហើយ — នេះជាជំហានបើក monetization លក្ខខណ្ឌ ច្បាប់មាតិកា AI និងចំណុចត្រូវដឹង។",
+tags: "youtube monetization cambodia រកលុយ",
+body: `
+<p><strong>សេចក្តីសន្និដ្ឋានខាងដើម៖</strong> YouTube Partner Program (YPP) បើកឱ្យ creator នៅកម្ពុជាតាំងពីខែវិច្ឆិកា ២០២២។ នេះជាផ្លូវរកលុយផ្ទាល់ស្របច្បាប់បំផុតសម្រាប់អ្នកបង្កើតមាតិកាខ្មែរ — មិនចាំបាច់ fake ប្រទេស ដែលប្រឈមនឹងការ ban ជាអចិន្ត្រៃយ៍។</p>
+<h2>លក្ខខណ្ឌដែលត្រូវការ</h2>
+<ul>
+<li>1,000 subscribers + 4,000 ម៉ោងមើល ក្នុង ១២ ខែចុងក្រោយ <strong>ឬ</strong> 10M Shorts views ក្នុង ៩០ ថ្ងៃ</li>
+<li>គណនី AdSense (ត្រូវអាសយដ្ឋានពិត — អាចទទួលប្រាក់នៅកម្ពុជា)</li>
+<li>អាយុ ១៨ ឆ្នាំឡើង (ឬមានអាណាព្យាបាល)</li>
+<li>គោរពគោលការណ៍សហគមន៍ YouTube</li>
+</ul>
+<h2>ជំហានបើក monetization</h2>
+<ol>
+<li>បង្កើត channel ហើយជ្រើសរើស <strong>niche ច្បាស់មួយ</strong> (ឧ. បង្រៀន AI ជាភាសាខ្មែរ) — កុំធ្វើគ្រប់រឿង។</li>
+<li>ផលិតវីដេអូជាប្រចាំ៖ គុណភាព ២ វីដេអូ/សប្តាហ៍ ល្អជាងរាល់ថ្ងៃតែគ្មានគុណភាព។</li>
+<li>តាមដានដំណើរការនៅ YouTube Studio → Analytics។</li>
+<li>ពេលគ្រប់លក្ខខណ្ឌ៖ ចូល YouTube Studio → Earn → Apply now។</li>
+<li>ភ្ជាប់ឬបង្កើត AdSense ហើយរង់ចាំ YouTube review (ជាធម្មតាច្រើនថ្ងៃ)។</li>
+</ol>
+<h2>មាតិកា AI — ច្បាប់ដែលត្រូវដឹង</h2>
+<p>YouTube អនុញ្ញាតមាតិកា AI-assisted ប៉ុន្តែ <strong>demonetize</strong> មាតិកាប្រភេទ «inauthentic» — ផលិតច្រើនដោយ AI សុទ្ធ គ្មានតម្លៃបន្ថែមពីមនុស្ស។ រូបមន្តសុវត្ថិភាព៖ មនុស្សត្រូវសម្រេចរឿងសំខាន់ៗ — angle, សរសេរ script ឡើងវិញ, editorial review, និង publish gate មុន post នីមួយៗ។ បើ AI មានតួនាទីសំខាន់ ត្រូវ disclosure។</p>
+<div class="note"><strong>🇰🇭 ចំណាំសម្រាប់កម្ពុជា៖</strong> ទទួលប្រាក់តាម AdSense ទៅធនាគារនៅកម្ពុជាបាន។ ប្រើព័ត៌មានពិត — ការ fake ប្រទេសដើម្បីគេចលក្ខខណ្ឌអាចត្រូវ ban ជាអចិន្ត្រៃយ៍។</div>
+<p><em>សេចក្តីបញ្ជាក់៖ គោលការណ៍ YouTube អាចប្រែប្រួល — ពិនិត្យ YouTube Help ជាផ្លូវការមុនសម្រេចចិត្ត។ អត្ថបទនេះមាន AI ជួយរៀបចំ។</em></p>`
+},
+{
+id: "how-to-write-prompts",
+title: "របៀបសរសេរ prompt ឱ្យ AI ឆ្លើយបានត្រូវចិត្ត",
+cat: "tips", date: "៨ តុលា ២០២៦", read: "៤ នាទី",
+excerpt: "រូបមន្ត ៥ ចំណុច + ឧទាហរណ៍ប្រៀបធៀប + គន្លឹះសរសេរ prompt ជាភាសាខ្មែរ។",
+tags: "prompt engineering ai tips",
+body: `
+<p>ប្រៀបធៀបងាយៗ៖ ការសរសេរ prompt ឱ្យ AI ដូចជាការប្រាប់អ្នកជួយការងារម្នាក់ — ប្រាប់កាន់តែច្បាស់ បានលទ្ធផលកាន់តែត្រូវចិត្ត។ ប្រាប់មិនច្បាស់ បានការងារខុស។</p>
+<h2>រូបមន្ត ៥ ចំណុច</h2>
+<ol>
+<li><strong>តួនាទី (Role)</strong> — «អ្នកជាអ្នកបង្រៀនភាសាខ្មែរ...»</li>
+<li><strong>បរិបទ (Context)</strong> — អ្នកណានឹងអាន? សម្រាប់អ្វី?</li>
+<li><strong>កិច្ចការ (Task)</strong> — ចង់បានអ្វីឱ្យច្បាស់ មួយកិច្ចការម្តង។</li>
+<li><strong>ទម្រង់ (Format)</strong> — បញ្ជី? តារាង? ប៉ុន្មានឃ្លា? ភាសាអ្វី?</li>
+<li><strong>ឧទាហរណ៍ (Example)</strong> — ឱ្យគំរូមួយ បើអាច។</li>
+</ol>
+<h2>ឧទាហរណ៍ប្រៀបធៀប</h2>
+<p><strong>❌ មិនល្អ៖</strong> «សរសេរអំពី AI មក» — AI មិនដឹងថាសម្រាប់អ្នកណា បែបណា ប៉ុន្មាន។</p>
+<p><strong>✅ ល្អ៖</strong> «អ្នកជាអ្នកបង្រៀន។ ពន្យល់ AI ឱ្យសិស្សថ្នាក់ទី ១០ យល់ក្នុង ៥ ឃ្លា ជាភាសាខ្មែរសាមញ្ញ ដោយប្រើ analogy ជីវិតប្រចាំថ្ងៃមួយ។»</p>
+<h2>គន្លឹះបន្ថែម</h2>
+<ul>
+<li>សរសេរខ្មែរបាន — AI ឆ្លើយខ្មែរបានល្អ បើអ្នកសុំឱ្យច្បាស់ («ឆ្លើយជាខ្មែរសាមញ្ញ»)។</li>
+<li>បំបែកកិច្ចការធំជាកិច្ចការតូចៗ។</li>
+<li>សុំឱ្យ AI សួរសំណួរត្រឡប់ពេលមិនច្បាស់។</li>
+<li>Iterate៖ ឆ្លើយមិនត្រូវ? ប្រាប់ថាខុសត្រង់ណា រួចសុំសរសេរឡើងវិញ — កុំចាប់ផ្តើមថ្មីរហូត។</li>
+<li>កុំដាក់ពាក្យសម្ងាត់ឬទិន្នន័យ sensitive ក្នុង free tier ដែល train លើ prompts។</li>
+</ul>
+<h2>ឃ្លាំង prompt ឥតគិតថ្លៃ</h2>
+<ul>
+<li>Awesome ChatGPT Prompts (GitHub, CC0 public domain)</li>
+<li>OpenAI Cookbook (MIT)</li>
+<li>Prompt Engineering Guide (GitHub, MIT)</li>
+</ul>
+<p><em>សេចក្តីបញ្ជាក់៖ អត្ថបទនេះមាន AI ជួយរៀបចំ។</em></p>`
+}
+];
+const app = document.getElementById('app');
+const q = document.getElementById('q');
+let activeCat = 'all', query = '';
+
+function esc(s){ return s; }
+
+function cardHTML(a){
+  return `<div class="card" onclick="location.hash='#/a/${a.id}'">
+    <span class="badge">${CATS[a.cat]}</span>
+    <h3>${a.title}</h3>
+    <p>${a.excerpt}</p>
+    <div class="meta"><span>📅 ${a.date}</span><span>⏱️ ${a.read}</span></div>
+  </div>`;
+}
+
+function relatedHTML(a){
+  const rel = ARTICLES.filter(x => x.id !== a.id && x.cat === a.cat).concat(
+    ARTICLES.filter(x => x.id !== a.id && x.cat !== a.cat)
+  ).slice(0,3);
+  return `<h2>អត្ថបទពាក់ព័ន្ធ</h2><div class="grid">` + rel.map(cardHTML).join('') + `</div>`;
+}
+
+function renderHome(){
+  const list = ARTICLES.filter(a =>
+    (activeCat === 'all' || a.cat === activeCat) &&
+    (!query || (a.title + ' ' + a.excerpt + ' ' + a.tags).toLowerCase().includes(query))
+  );
+  const pills = ['all'].concat(Object.keys(CATS)).map(c =>
+    `<button class="pill ${c===activeCat?'active':''}" data-cat="${c}">${c==='all'?'ទាំងអស់':CATS[c]}</button>`
+  ).join('');
+  app.innerHTML = `
+    <section class="hero">
+      <h1>រៀន AI ជាភាសាខ្មែរ</h1>
+      <p>ឧបករណ៍ឥតគិតថ្លៃ របៀបប្រើជាជំហាន ព័ត៌មាន AI — ឥតគិតថ្លៃ ជាក់ស្តែង ប្រើបានពិតនៅកម្ពុជា។</p>
+      <a class="btn" href="#latest">អានអត្ថបទថ្មីៗ</a>
+      <a class="btn ghost" href="#/about">អំពីយើង</a>
+    </section>
+    <div class="pills" id="latest">${pills}</div>
+    <div class="grid">${list.length ? list.map(cardHTML).join('') : '<div class="empty">រកមិនឃើញអត្ថបទ — សាកពាក្យផ្សេង។</div>'}</div>
+    <section class="newsletter">
+      <h2>📬 ទទួលមេរៀន AI ថ្មីៗតាម email</h2>
+      <p>អត្ថបទថ្មី ឧបករណ៍ឥតគិតថ្លៃ និង offer ពិសេស — ផ្ញើត្រង់ទៅ inbox របស់អ្នក។</p>
+      <form id="nlForm"><input type="email" required placeholder="អ៊ីមែលរបស់អ្នក"><button type="submit">ចុះឈ្មោះ</button></form>
+      <div class="form-msg" id="nlMsg"></div>
+    </section>`;
+  app.querySelectorAll('.pill').forEach(b => b.onclick = () => { activeCat = b.dataset.cat; renderHome(); });
+  const f = document.getElementById('nlForm');
+  if (f) f.onsubmit = e => {
+    e.preventDefault();
+    document.getElementById('nlMsg').textContent = 'អរគុណ! ប្រព័ន្ធ newsletter នឹងបើកដំណើរការឆាប់ៗ — តាមដានយើងសិន។';
+    f.reset();
+  };
+}
+
+function renderArticle(id){
+  const a = ARTICLES.find(x => x.id === id);
+  if (!a){ location.hash = '#/'; return; }
+  document.title = a.title + ' — AIខ្មែរ';
+  app.innerHTML = `
+    <div class="article">
+      <a class="back" href="#/">← ត្រឡប់ទៅទំព័រដើម</a>
+      <span class="badge">${CATS[a.cat]}</span>
+      <h1>${a.title}</h1>
+      <div class="meta"><span>📅 ${a.date}</span><span>⏱️ អាន ${a.read}</span></div>
+      ${a.body}
+      <div class="note"><strong>ចែករំលែក៖</strong> បើអត្ថបទនេះមានប្រយោជន៍ ចែករំលែកឱ្យមិត្តភក្តិបានដឹងផង។</div>
+      ${relatedHTML(a)}
+    </div>`;
+  window.scrollTo(0,0);
+}
+
+function renderAbout(){
+  document.title = 'អំពីយើង — AIខ្មែរ';
+  app.innerHTML = `
+    <div class="about">
+      <h1>អំពី AIខ្មែរ</h1>
+      <p><strong>AIខ្មែរ</strong> ជា website សម្រាប់រៀនប្រើ AI ជាភាសាខ្មែរ — ឥតគិតថ្លៃ ជាក់ស្តែង និងផ្តោតលើអ្វីដែលប្រើបានពិតនៅកម្ពុជា។</p>
+      <p>អត្ថបទនីមួយៗអនុវត្តតាមស្តង់ដាររបស់យើង៖ ចំណងជើងច្បាស់ សង្ខេបស្មោះត្រង់នៅខាងដើម ជំហានធ្វើជាក់ស្តែង និងចំណាំពិសេសសម្រាប់កម្ពុជា (តើប្រើបានឬអត់ ត្រូវការ card ឬអត់)។</p>
+      <h2 style="margin-top:24px">ស្តង់ដាររបស់យើង</h2>
+      <ul>
+        <li>ភាសាខ្មែរសាមញ្ញ ងាយយល់ — មិនលាយពាក្យថៃ</li>
+        <li>ព័ត៌មានបានផ្ទៀងផ្ទាត់ — មិនសន្យាខុស</li>
+        <li>បញ្ជាក់ច្បាស់ពេល AI ជួយសរសេរ</li>
+        <li>គិតពីកម្ពុជាជាមុន — eligibility, card, តម្លៃ</li>
+      </ul>
+      <p style="margin-top:16px">ទំនាក់ទំនង៖ តាមរយៈ YouTube និង Facebook ខាងក្រោម។</p>
+    </div>`;
+  window.scrollTo(0,0);
+}
+
+function route(){
+  const h = location.hash;
+  if (h.startsWith('#/a/')) renderArticle(h.slice(4));
+  else if (h === '#/about') renderAbout();
+  else { document.title = 'AIខ្មែរ — រៀន AI ជាភាសាខ្មែរ'; renderHome(); }
+}
+
+q.addEventListener('input', () => { query = q.value.trim().toLowerCase(); if(!location.hash.startsWith('#/a/')) renderHome(); });
+
+const themeBtn = document.getElementById('themeBtn');
+function setTheme(t){
+  document.documentElement.dataset.theme = t;
+  themeBtn.textContent = t === 'dark' ? '🌙' : '☀️';
+  try{ localStorage.setItem('aik-theme', t); }catch(e){}
+}
+themeBtn.onclick = () => setTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark');
+try{ setTheme(localStorage.getItem('aik-theme') || 'dark'); }catch(e){ setTheme('dark'); }
+
+window.addEventListener('hashchange', route);
+route();
+</script>
+</body>
+</html>
